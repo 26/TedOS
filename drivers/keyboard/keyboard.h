@@ -9,7 +9,7 @@
 #define KEYBOARD_STATUS_PORT 0x64
 
 extern void keyboard_handler(void);
-void kb_init(void);
-void keyboard_handler_main(void);
+extern void kb_init(void);
+extern void keyboard_handler_main(void);
 
 #endif //TOYKERNEL_KEYBOARD_H
