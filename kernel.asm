@@ -1,4 +1,4 @@
-; kernel-001.asm
+; kernel.asm
 
 ; nasm directive - 32 bit
 bits 32
