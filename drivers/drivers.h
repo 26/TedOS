@@ -4,7 +4,7 @@
 /* include all available driver header files */
 
 #include "idt/idt.h"
-#include "display/display.h"
+#include "screen/screen.h"
 #include "cursor/cursor.h"
 #include "keyboard/keyboard.h"
 

@@ -22,6 +22,6 @@ void kmain(void)
 }
 
 #include "drivers/idt/idt.c"
-#include "drivers/display/display.c"
+#include "drivers/screen/screen.c"
 #include "drivers/cursor/cursor.c"
 #include "drivers/keyboard/keyboard.c"
