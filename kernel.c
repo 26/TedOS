@@ -3,7 +3,7 @@
 * License: GPL version 2 or higher http://www.gnu.org/licenses/gpl.html
 */
 
-#include "keyboard_map.h"
+#include "keymap.h"
 
 #define LINES 25
 #define COLUMNS_IN_LINE 80
@@ -16,18 +16,13 @@
 #define KERNEL_CODE_SEGMENT_OFFSET 0x08
 #define ENTER_KEY_CODE 0x1C
 
-extern unsigned char keyboard_map[128];
 extern void keyboard_handler(void);
-extern char read_port(unsigned short port);
+extern unsigned char read_port(unsigned short port);
 extern void write_port(unsigned short port, unsigned char data);
 extern void load_idt(unsigned long *idt_ptr);
 
 char *vidptr = (char*)0xb8000;
 unsigned int current_loc = 0;
-
-/*
-*  kernel-001.c
-*/
 
 struct IDT_entry {
     unsigned short int offset_lowerbits;
@@ -72,11 +67,6 @@ void idt_init(void)
     load_idt(idt_ptr);
 }
 
-void kb_init(void)
-{
-    write_port(0x21 , 0xFD);
-}
-
 /**
  * Output a char pointer array to the screen.
  *
@@ -114,16 +104,13 @@ void kernel_clear_screen(void)
 
 void keyboard_handler_main(void)
 {
-    unsigned char status;
-    char keycode;
-
     write_port(0x20, 0x20);
+    unsigned char status = read_port(KEYBOARD_STATUS_PORT);
 
-    status = read_port(KEYBOARD_STATUS_PORT);
-    /* Lowest bit of status will be set if buffer is not empty */
     if (status & 0x01) {
-        keycode = read_port(KEYBOARD_DATA_PORT);
-        if(keycode < 0) {
+        unsigned char keycode = read_port(KEYBOARD_DATA_PORT);
+
+        if(keycode < 0 || keycode > 127) {
             return;
         }
 
@@ -132,16 +119,23 @@ void keyboard_handler_main(void)
             return;
         }
 
-        vidptr[current_loc++] = keyboard_map[(unsigned char) keycode];
+        vidptr[current_loc++] = keymap[(unsigned char) keycode];
         vidptr[current_loc++] = 0x07;
     }
 }
 
-void kmain(void) {
-    const char *str = "VimOS 0.0.0";
+void kb_init(void)
+{
+    write_port(0x21 , 0xFD);
+}
+
+void kmain(void)
+{
+    const char *str = "VimOS 0.0.1";
 
     kernel_clear_screen();
     kernel_print(str);
+
     kernel_print_newline();
     kernel_print_newline();
 
