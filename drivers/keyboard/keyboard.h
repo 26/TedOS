@@ -1,5 +1,4 @@
-#ifndef TOYKERNEL_KEYBOARD_H
-#define TOYKERNEL_KEYBOARD_H
+#pragma once
 
 #include "keymap.h"
 
@@ -11,5 +10,3 @@
 extern void keyboard_handler(void);
 extern void kb_init(void);
 extern void keyboard_handler_main(void);
-
-#endif //TOYKERNEL_KEYBOARD_H

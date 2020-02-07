@@ -1,5 +1,4 @@
-#ifndef TOYKERNEL_KMAIN_H
-#define TOYKERNEL_KMAIN_H
+#pragma once
 
 #define LINES 25
 #define COLUMNS_IN_LINE 80
@@ -18,4 +17,3 @@ unsigned int current_loc = 0;
 extern void start();
 extern void kernel_shutdown();
 
-#endif //TOYKERNEL_KMAIN_H
