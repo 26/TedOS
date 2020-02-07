@@ -15,7 +15,7 @@ kasm.o: kernel.asm
 	$(AS) $(ASFLAGS) kernel.asm -o kasm.o
 
 kc.o: kernel.c
-	$(CC) $(CFLAGS) -o kc.o -c kernel.c
+	$(CC) $(CFLAGS) -o kc.o -c -fno-stack-protector kernel.c
 
 clean:
 	rm -f kernel vimOS.iso *.o
