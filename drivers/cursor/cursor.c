@@ -1,4 +1,5 @@
 #include "../../kmain.h"
+#include "cursor.h"
 
 /**
  * Enables the cursor.
@@ -15,7 +16,7 @@ void cursor_init(unsigned short cursor_start, unsigned short cursor_end)
 /**
  * Disables the cursor.
  */
-void disable_cursor(void)
+void cursor_disable(void)
 {
     write_port(0x3D4, 0x0A);
     write_port(0x3D5, 0x20);
@@ -28,7 +29,7 @@ void disable_cursor(void)
  * @param x
  * @param y
  */
-void update_cursor(int x, int y)
+void cursor_set(int x, int y)
 {
     unsigned short pos = y * COLUMNS_IN_LINE + x;
 
@@ -44,7 +45,7 @@ void update_cursor(int x, int y)
  * @credit osdev.org
  * @return
  */
-unsigned short get_cursor_position(void)
+unsigned short cursor_get_position(void)
 {
     unsigned short pos = 0;
 
