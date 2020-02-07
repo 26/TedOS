@@ -3,6 +3,10 @@
 * License: GPL version 2 or higher http://www.gnu.org/licenses/gpl.html
 */
 
+#include "./drivers/screen/screen.h"
+#include "./drivers/idt/idt.h"
+#include "./drivers/keyboard/keyboard.h"
+
 #include "kmain.h"
 
 void kmain(void)
@@ -15,13 +19,10 @@ void kmain(void)
     kernel_print_newline();
     kernel_print_newline();
 
-    idt_init();
+    idt_init((unsigned long) keyboard_handler);
     kb_init();
 
-    while(1);
+    while(1)
+	    ;
 }
 
-#include "drivers/idt/idt.c"
-#include "drivers/screen/screen.c"
-#include "drivers/cursor/cursor.c"
-#include "drivers/keyboard/keyboard.c"

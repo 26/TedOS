@@ -1,4 +1,7 @@
-#include "../../kmain.h"
+#include "common.h"
+
+static char *vidptr = (char*)0xb8000;
+static unsigned int current_loc = 0;
 
 void kernel_print_char(char str) {
     vidptr[current_loc++] = str;

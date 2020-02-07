@@ -1,5 +1,7 @@
-#include "../../kmain.h"
 #include "cursor.h"
+#include "common.h"
+
+#include "../../memory.h"
 
 /**
  * Enables the cursor.
