@@ -19,14 +19,3 @@ kc.o: kernel.c
 
 clean:
 	rm -f kernel vimOS.iso *.o
-
-iso: vimOS.iso
-
-vimOS.iso: kernel
-	mkdir -pv iso/boot/grub
-	cp kernel iso/boot
-	cp grub.cfg iso/boot/grub
-	grub-file --is-x86-multiboot iso/boot/kernel
-	grub-mkrescue -o VimOS.iso iso
-	rm -rf iso
-
