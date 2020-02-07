@@ -1,4 +1,4 @@
-CFLAGS=-m32
+CFLAGS=-m32 -fno-stack-protector
 ASFLAGS=-f elf32
 LDFLAGS=-m elf_i386
 
@@ -15,7 +15,7 @@ kasm.o: kernel.asm
 	$(AS) $(ASFLAGS) kernel.asm -o kasm.o
 
 kc.o: kernel.c
-	$(CC) $(CFLAGS) -o kc.o -c -fno-stack-protector kernel.c
+	$(CC) $(CFLAGS) -o kc.o -c kernel.c
 
 clean:
 	rm -f kernel vimOS.iso *.o
