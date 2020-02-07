@@ -12,8 +12,8 @@ section .text
 global start
 global kernel_shutdown
 global keyboard_handler
-global read_port
-global write_port
+global port_read
+global port_write
 global load_idt
 
 extern keyboard_handler_main
@@ -30,13 +30,13 @@ kernel_shutdown:
 
     ret  ; if interrupt doesnt work
 
-read_port:
+port_read:
     ; read data from port
 	mov edx, [esp + 4]
 	in al, dx
 	ret
 
-write_port:
+port_write:
     ; write data to port
 	mov   edx, [esp + 4]
 	mov   al, [esp + 4 + 4]

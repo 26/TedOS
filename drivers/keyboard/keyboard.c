@@ -54,7 +54,7 @@ static unsigned char keymap[128] = {
 
 void kb_init(void)
 {
-    write_port(0x21 , 0xFD);
+    port_write(0x21 , 0xFD);
 }
 
 void handle_keypress(unsigned char keycode) {
@@ -74,11 +74,11 @@ void handle_keypress(unsigned char keycode) {
 
 void keyboard_handler_main(void)
 {
-    write_port(0x20, 0x20);
-    unsigned char status = read_port(KEYBOARD_STATUS_PORT);
+    port_write(0x20, 0x20);
+    unsigned char status = port_read(KEYBOARD_STATUS_PORT);
 
     if (status & 0x01) {
-        unsigned char keycode = read_port(KEYBOARD_DATA_PORT);
+        unsigned char keycode = port_read(KEYBOARD_DATA_PORT);
 
         if(keycode < 0 || keycode > 127) {
             return;

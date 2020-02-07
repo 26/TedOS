@@ -8,11 +8,11 @@
  */
 void cursor_init(unsigned short cursor_start, unsigned short cursor_end)
 {
-    write_port(0x3D4, 0x0A);
-    write_port(0x3D5, (read_port(0x3D5) & 0xC0) | cursor_start);
+    port_write(0x3D4, 0x0A);
+    port_write(0x3D5, (port_read(0x3D5) & 0xC0) | cursor_start);
 
-    write_port(0x3D4, 0x0B);
-    write_port(0x3D5, (read_port(0x3D5) & 0xE0) | cursor_end);
+    port_write(0x3D4, 0x0B);
+    port_write(0x3D5, (port_read(0x3D5) & 0xE0) | cursor_end);
 }
 
 /**
@@ -20,8 +20,8 @@ void cursor_init(unsigned short cursor_start, unsigned short cursor_end)
  */
 void cursor_disable(void)
 {
-    write_port(0x3D4, 0x0A);
-    write_port(0x3D5, 0x20);
+    port_write(0x3D4, 0x0A);
+    port_write(0x3D5, 0x20);
 }
 
 /**
@@ -35,10 +35,10 @@ void cursor_set(int x, int y)
 {
     unsigned short pos = y * COLUMNS_IN_LINE + x;
 
-    write_port(0x3D4, 0x0F);
-    write_port(0x3D5, (unsigned short) (pos & 0xFF));
-    write_port(0x3D4, 0x0E);
-    write_port(0x3D5, (unsigned short) ((pos >> 8) & 0xFF));
+    port_write(0x3D4, 0x0F);
+    port_write(0x3D5, (unsigned short) (pos & 0xFF));
+    port_write(0x3D4, 0x0E);
+    port_write(0x3D5, (unsigned short) ((pos >> 8) & 0xFF));
 }
 
 /**
@@ -51,11 +51,11 @@ unsigned short cursor_get_position(void)
 {
     unsigned short pos = 0;
 
-    write_port(0x3D4, 0x0F);
-    pos |= read_port(0x3D5);
+    port_write(0x3D4, 0x0F);
+    pos |= port_read(0x3D5);
 
-    write_port(0x3D4, 0x0E);
-    pos |= ((unsigned short)read_port(0x3D5)) << 8;
+    port_write(0x3D4, 0x0E);
+    pos |= ((unsigned short)port_read(0x3D5)) << 8;
 
     return pos;
 }

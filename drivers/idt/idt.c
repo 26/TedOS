@@ -32,16 +32,16 @@ void idt_init(unsigned long keyboard_handler)
     IDT_entries[0x21].type_attr = INTERRUPT_GATE;
     IDT_entries[0x21].offset_higherbits = (keyboard_address & 0xffff0000) >> 16;
 
-    write_port(0x20, 0x11);
-    write_port(0xA0, 0x11);
-    write_port(0x21, 0x20);
-    write_port(0xA1, 0x28);
-    write_port(0x21, 0x00);
-    write_port(0xA1, 0x00);
-    write_port(0x21, 0x01);
-    write_port(0xA1, 0x01);
-    write_port(0x21, 0xff);
-    write_port(0xA1, 0xff);
+    port_write(0x20, 0x11);
+    port_write(0xA0, 0x11);
+    port_write(0x21, 0x20);
+    port_write(0xA1, 0x28);
+    port_write(0x21, 0x00);
+    port_write(0xA1, 0x00);
+    port_write(0x21, 0x01);
+    port_write(0xA1, 0x01);
+    port_write(0x21, 0xff);
+    port_write(0xA1, 0xff);
 
     idt_address = (unsigned long)IDT_entries;
     idt_ptr[0] = (sizeof (struct IDT_entry) * IDT_SIZE) + ((idt_address & 0xffff) << 16);
