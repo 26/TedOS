@@ -1,4 +1,3 @@
-#include "cursor.h"
 #include "common.h"
 
 #include "../../memory.h"

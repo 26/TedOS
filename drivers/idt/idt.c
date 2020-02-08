@@ -1,7 +1,6 @@
 #include "idt.h"
 
 #include "../../memory.h"
-#include "../../kmain.h"
 
 #define IDT_SIZE 256
 #define INTERRUPT_GATE 0x8e

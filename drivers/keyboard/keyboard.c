@@ -1,12 +1,10 @@
-#include "keyboard.h"
-
 #include "../../kmain.h"
 #include "../../memory.h"
 
 #include "../screen/screen.h"
 
 #define ENTER_KEY_CODE 0x1C
-#define ESCAPE_KEY_CODE 0x1B
+#define ESCAPE_KEY_CODE 0x01
 #define KEYBOARD_DATA_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
 
@@ -58,6 +56,8 @@ void kb_init(void)
 }
 
 void handle_keypress(unsigned char keycode) {
+    char string[5];
+
     switch(keycode) {
         case ENTER_KEY_CODE:
             kernel_print_newline();
@@ -81,6 +81,7 @@ void keyboard_handler_main(void)
         unsigned char keycode = port_read(KEYBOARD_DATA_PORT);
 
         if(keycode < 0 || keycode > 127) {
+            // Invalid keycode or extended ASCII code (unsupported)
             return;
         }
 
