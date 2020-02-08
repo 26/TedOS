@@ -1,0 +1,15 @@
+name: C CI
+
+on: [push]
+
+jobs:
+  build:
+    name: make kernel
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Clean and build
+      run: |
+        make clean
+        make kernel
