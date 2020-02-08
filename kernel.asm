@@ -16,10 +16,13 @@ global port_read
 global port_write
 global load_idt
 
+extern shutdown_emulator_specific
 extern keyboard_handler_main
 extern kmain
 
 kernel_shutdown:
+    call shutdown_emulator_specific ; call emulator-specific shutdown methods
+
     mov ax, 0x1000
     mov ax, ss
     mov sp, 0xf000
@@ -28,7 +31,7 @@ kernel_shutdown:
     mov cx, 0x0003
     int 0x15
 
-    ret  ; if interrupt doesnt work
+    ret ; if interrupt doesnt work
 
 port_read:
     ; read data from port

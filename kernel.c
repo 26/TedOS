@@ -7,7 +7,7 @@
 #include "./drivers/idt/idt.h"
 #include "./drivers/keyboard/keyboard.h"
 
-#include "kmain.h"
+#include "memory.h"
 
 void kmain(void)
 {
@@ -22,7 +22,13 @@ void kmain(void)
     idt_init((unsigned long) keyboard_handler);
     kb_init();
 
-    while(1)
-	    ;
+    while(1) {}
+}
+
+void shutdown_emulator_specific(void)
+{
+    port_write(0xB004, 0x2000); // Bochs and old QEMU versions
+    port_write(0x604, 0x2000); // QEMU
+    port_write(0x4004, 0x3400); // VirtualBox
 }
 
