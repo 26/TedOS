@@ -1,0 +1,16 @@
+name: make kernel
+
+on: [push]
+
+jobs:
+  build:
+    name: make kernel
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: ilammy/setup-nasm@v1
+    - uses: actions/checkout@v2
+    - name: Clean and build
+      run: |
+        make clean
+        make kernel
