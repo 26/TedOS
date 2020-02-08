@@ -1,15 +1,25 @@
 CFLAGS=-m32 -fno-stack-protector
 ASFLAGS=-f elf32
 LDFLAGS=-m elf_i386
+MKFLAGS=
+QMFLAGS=-kernel
 
 CC=gcc
 AS=nasm
 LD=ld
+MK=make
+QM=qemu-system-i386
 
 all: kernel
 
 kernel: kasm.o kc.o driver_idt.o driver_keyboard.o driver_screen_screen.o driver_screen_cursor.o link.ld 
 	$(LD) $(LDFLAGS) -o kernel kasm.o kc.o driver_idt.o driver_keyboard.o driver_screen_screen.o driver_screen_cursor.o -T link.ld
+
+debug: kernel
+	$(MK) $(MKFLAGS) clean
+	$(MK) $(MKFLAGS) kernel
+	$(QM) $(QMFLAGS) kernel
+	$(MK) $(MKFLAGS) clean
 
 kasm.o: kernel.asm
 	$(AS) $(ASFLAGS) kernel.asm -o kasm.o
