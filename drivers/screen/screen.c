@@ -5,6 +5,7 @@ static unsigned int current_loc = 0;
 
 void kernel_print_char(char str) {
     vidptr[current_loc++] = str;
+    vidptr[current_loc++] = 0x07;
 }
 
 /**
@@ -40,4 +41,20 @@ void kernel_clear_screen(void)
         vidptr[i++] = ' ';
         vidptr[i++] = 0x07;
     }
+}
+
+void kernel_backspace(void)
+{
+    vidptr[--current_loc] = 0x07;
+    vidptr[--current_loc] = ' ';
+}
+
+void location_reset(void)
+{
+    current_loc = 0;
+}
+
+void location_set(unsigned int position)
+{
+    current_loc = position;
 }
