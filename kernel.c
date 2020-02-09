@@ -4,27 +4,42 @@
 */
 
 #include "./drivers/screen/screen.h"
+#include "./drivers/screen/cursor.h"
 #include "./drivers/idt/idt.h"
 #include "./drivers/keyboard/keyboard.h"
 
 #include "memory.h"
+#include "kernel.h"
 
+/**
+ * Main kernel entrypoint
+ */
 void kmain(void)
 {
-    const char *str = "VimOS 0.0.1";
+    kernel_mode = BOOT_KERNEL_MODE;
 
-    kernel_clear_screen();
-    kernel_print(str);
-
-    kernel_print_newline();
-    kernel_print_newline();
+    const char *header = "VimOS ";
+    const char *version = "0.0.1";
 
     idt_init((unsigned long) keyboard_handler);
     kb_init();
 
+    cursor_set(0,2);
+
+    kernel_clear_screen();
+
+    kernel_print(header);
+    kernel_print(version);
+
+    kernel_print_newline();
+    kernel_print_newline();
+
     while(1) {}
 }
 
+/**
+ * Initiliaze emulator specific shutdown sequence
+ */
 void shutdown_emulator_specific(void)
 {
     port_write(0xB004, 0x2000); // Bochs and old QEMU versions
