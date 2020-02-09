@@ -58,3 +58,25 @@ unsigned short cursor_get_position(void)
 
     return pos;
 }
+
+/**
+ * Moves the cursor relative to its current coordinates.
+ *
+ * @param x
+ * @param y
+ */
+void cursor_move_relative(int x, int y) {
+    unsigned short position_current = cursor_get_position();
+
+    unsigned short x_current = position_current % COLUMNS_IN_LINE;
+    unsigned short y_current = position_current / COLUMNS_IN_LINE;
+
+    cursor_set(x_current + x, y_current + y);
+}
+
+void cursor_move_newline() {
+    unsigned short position_current = cursor_get_position();
+    unsigned short y_current = position_current / COLUMNS_IN_LINE;
+
+    cursor_set(0, y_current + 1);
+}
