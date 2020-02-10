@@ -1,8 +1,3 @@
-/*
-* Copyright (C) 2014  Arjun Sreedharan
-* License: GPL version 2 or higher http://www.gnu.org/licenses/gpl.html
-*/
-
 #include "./drivers/screen/screen.h"
 #include "./drivers/screen/cursor.h"
 #include "./drivers/idt/idt.h"
@@ -38,7 +33,18 @@ void kmain(void)
 }
 
 /**
- * Initiliaze emulator specific shutdown sequence
+ * This function gets called by the keyboard driver when a new keyboard event has occurred.
+ */
+void handle_keyboard_event(void) {
+    if(keyboard_event->ctrl == true && keyboard_event->alt == true) {
+        kernel_print_char('y');
+    } else if(keyboard_event->keycode > 0 && keyboard_event->keycode < 127) {
+        kernel_print_char('n');
+    }
+}
+
+/**
+ * Initialize emulator specific shutdown sequence
  */
 void shutdown_emulator_specific(void)
 {

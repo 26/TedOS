@@ -74,7 +74,10 @@ void cursor_move_relative(int x, int y) {
     cursor_set(x_current + x, y_current + y);
 }
 
-void cursor_move_newline() {
+/**
+ * Moves the cursor down one line and to the left of the screen.
+ */
+void cursor_move_newline(void) {
     unsigned short position_current = cursor_get_position();
     unsigned short y_current = position_current / COLUMNS_IN_LINE;
 

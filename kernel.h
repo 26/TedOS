@@ -10,7 +10,8 @@ enum {
 
 typedef enum {false = 0, true = 1} bool;
 
-extern void shutdown_emulator_specific(void);
 extern void kmain(void);
 extern void start(void);
+extern void handle_keyboard_event(void);
 extern void kernel_shutdown(void);
+extern void shutdown_emulator_specific(void);
