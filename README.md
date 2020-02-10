@@ -1,11 +1,9 @@
-![](https://raw.githubusercontent.com/Pancake/VimOS/master/docs/vimos-small.png)
-
-VimOS
+TedOS
 =====
 
 ![make kernel](https://github.com/Pancake/VimOS/workflows/make%20kernel/badge.svg)
 
-**Please note the operating system is currently non-functional does not have Vim implemented yet.**
+TedOS is an operating system, or more specifically a kernel, that only implements a Vim-like text editor.
 
 Running the OS
 ==============
