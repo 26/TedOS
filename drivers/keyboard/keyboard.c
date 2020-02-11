@@ -5,6 +5,8 @@
 #define KEYBOARD_DATA_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
 
+struct kbd_event *keyboard_event; /* exported in keyboard.h */
+
 void kb_init(void)
 {
     port_write(0x21 , 0xFD);

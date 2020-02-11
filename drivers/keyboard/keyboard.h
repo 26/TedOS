@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../../kernel.h"
-
 #define CTRL_PRESS_KEY_CODE 29
 #define CTRL_RELEASE_KEY_CODE 157
 #define LSHIFT_PRESS_KEY_CODE 42
@@ -67,4 +65,7 @@ struct kbd_event {
     bool capslock : 1;
 
     unsigned char keycode : 8;
-} *keyboard_event;
+};
+
+extern struct kbd_event *keyboard_event;
+

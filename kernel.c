@@ -1,17 +1,20 @@
+#include "memory.h"
+#include "kernel.h"
+
 #include "./drivers/screen/screen.h"
 #include "./drivers/screen/cursor.h"
 #include "./drivers/idt/idt.h"
 #include "./drivers/keyboard/keyboard.h"
 
-#include "memory.h"
-#include "kernel.h"
+
+enum kernel_mode mode;
 
 /**
  * Main kernel entrypoint
  */
 void kmain(void)
 {
-    kernel_mode = BOOT_KERNEL_MODE;
+    mode = BOOT_KERNEL_MODE;
 
     const char *header = "VimOS ";
     const char *version = "0.0.1";
