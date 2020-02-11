@@ -1,8 +1,6 @@
 #pragma once
 
-int kernel_mode;
-
-enum {
+enum kernel_mode {
     SHUTDOWN_KERNEL_MODE,
     BOOT_KERNEL_MODE,
     VIM_KERNEL_MODE
@@ -15,3 +13,4 @@ extern void start(void);
 extern void handle_keyboard_event(void);
 extern void kernel_shutdown(void);
 extern void shutdown_emulator_specific(void);
+

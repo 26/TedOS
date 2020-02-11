@@ -44,6 +44,8 @@ unsigned char keymap[128] = {
     0,	/* All other keys are undefined */
 };
 
+struct kbd_event *keyboard_event; /* exported in keyboard.h */
+
 void kb_init(void)
 {
     port_write(0x21 , 0xFD);

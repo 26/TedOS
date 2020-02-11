@@ -1,4 +1,4 @@
-CFLAGS=-m32 -fno-stack-protector
+CFLAGS=-m32 -nostdinc -fno-stack-protector -std=c11 -Wall -Wextra -pedantic
 ASFLAGS=-f elf32
 LDFLAGS=-m elf_i386
 MKFLAGS=
